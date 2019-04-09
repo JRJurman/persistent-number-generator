@@ -13,5 +13,9 @@ class filterForTarget_spec(unittest.TestCase):
     result = filterForTarget(np.array([11,12,13,14,15]), 5)
     self.assertEqual(result, [15])
 
+  def test_odd_digit_list(self):
+    result = filterForTarget(np.array([21,152,13,154,125]), 10)
+    self.assertEqual(result.tolist(), [152, 125])
+
 if __name__ == '__main__':
     unittest.main()
