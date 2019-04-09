@@ -12,19 +12,20 @@ def multiplyDigits(number):
   # build a range from 0 to our max number of digits
   # repeat that for however many digits we have
   # e.g. 4 -> 0, 1, 2, 3
-  mask = np.mgrid[0:maxNod]
+  mask = np.tile(np.arange(0, maxNod, dtype=object), number.shape + (1,))
 
   # split our numbers into digit arrays
   # (will have zeros at the end for any digits not counted)
   # e.g. 256, max=5 -> [2, 5, 6, 0, 0]
-  # digits = number // 10 ** np.mgrid[0:maxNod][:, None] % 10
-  digits = number // 10 ** np.arange(maxNod, dtype=object) % 10
+  # digits = (number // 10 ** np.mgrid[0:maxNod][:, None]) % 10
+  # digits = (number // 10 ** np.arange(maxNod, dtype=object)) % 10
+  digits = (number[:, None] // 10 ** mask) % 10
 
   # fill in zeros from before with ones, if our nod is less than the max
   # e.g. 256, max=5 -> ([2, 5, 6, 0, 0], nod = 3) -> [2, 5, 6, 1, 1]
   # still keeps any zeros in the original below the nod
   # e.g. 206, max=5 -> ([2, 0, 6, 0, 0], nod = 3) -> [2, 0, 6, 1, 1]
-  digitsWithOnes = np.where(mask < nod, digits, 1)
+  digitsWithOnes = np.where(mask < nod[:, None], digits, 1)
 
   # build product
   return np.prod(digitsWithOnes, axis=-1)
