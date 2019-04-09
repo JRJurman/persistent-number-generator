@@ -17,7 +17,7 @@ class generatePersistentNumbers_spec(unittest.TestCase):
 
   def test_multi_digit_number(self):
     result = generatePersistentNumbers(np.array([10]))
-    self.assertEqual(result.tolist(), [ 25,  52, 125, 152, 215, 251, 512, 521])
+    self.assertEqual(result.tolist(), [25,  52, 125, 152, 215, 251, 512, 521])
 
   def test_even_single_dimension(self):
     result = generatePersistentNumbers(np.array([3, 4, 5]))
@@ -26,14 +26,17 @@ class generatePersistentNumbers_spec(unittest.TestCase):
     result = generatePersistentNumbers(np.array([13, 24]))
     self.assertEqual(result.tolist(), [38, 46, 64, 83, 138, 146, 164, 183, 226, 234, 243, 262, 318, 324, 342, 381, 416, 423, 432, 461, 614, 622, 641, 813, 831])
 
-  # def test_odd_single_dimension(self):
-  #   result = generatePersistentNumbers(np.array([0, 10, 2]))
-  #   solution = np.arange(0, 1000)
-  #   solutionAsList = solution.tolist()
-  #   resultAsList = result.tolist()
-  #   self.assertEqual(len(resultAsList[0]), len(solutionAsList))
-  #   self.assertEqual(len(resultAsList[1]), len(solutionAsList))
-  #   self.assertEqual(len(resultAsList[2]), len(solutionAsList))
+  def test_odd_single_dimension(self):
+    result = generatePersistentNumbers(np.array([2, 10]))
+    self.assertEqual(result.tolist(), [2, 12, 21, 25, 52, 125, 152, 215, 251, 512, 521])
+
+  def test_dud_numbers(self):
+    result = generatePersistentNumbers(np.array([13]))
+    self.assertEqual(result.tolist(), [])
+
+    result = generatePersistentNumbers(np.array([31]))
+    self.assertEqual(result.tolist(), [])
+
 
 if __name__ == '__main__':
     unittest.main()

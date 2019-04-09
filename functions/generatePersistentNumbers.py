@@ -11,5 +11,5 @@ def generatePersistentNumbers(start):
   """
   return filterForTarget(
     generateOptions(start),
-    start
+    start[:,None]
   )

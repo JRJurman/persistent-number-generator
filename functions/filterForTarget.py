@@ -1,3 +1,4 @@
+import numpy as np
 from functions.multiplyDigits import multiplyDigits
 
 def filterForTarget(listOfNumbers, target):
@@ -15,4 +16,4 @@ def filterForTarget(listOfNumbers, target):
     nDim results
   """
   products = multiplyDigits(listOfNumbers)
-  return listOfNumbers[products == target[:, None]]
+  return listOfNumbers[products == target]
