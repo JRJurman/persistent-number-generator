@@ -4,6 +4,20 @@ from functions.numOfDigits import numOfDigits
 # multiplyDigits - takes in an array of numbers,
 # and returns the product of it's digits
 def multiplyDigits(number):
+  """
+  gives the product of all digits in a number
+
+  Example:
+    [567] -> [210]
+    [5, 77, 435] -> [5, 49, 60]
+
+  Parameters:
+    number: an nDim list of numbers
+
+  Returns:
+    an nDim list of the number's digit's product
+  """
+
   # calculate the number of digits and the max number of digits
   # e.g. [4 -> 1, 20 -> 2, 153 -> 3], maxNod -> 3
   nod = numOfDigits(number)
@@ -17,8 +31,6 @@ def multiplyDigits(number):
   # split our numbers into digit arrays
   # (will have zeros at the end for any digits not counted)
   # e.g. 256, max=5 -> [2, 5, 6, 0, 0]
-  # digits = (number // 10 ** np.mgrid[0:maxNod][:, None]) % 10
-  # digits = (number // 10 ** np.arange(maxNod, dtype=object)) % 10
   digits = (number[:, None] // 10 ** mask) % 10
 
   # fill in zeros from before with ones, if our nod is less than the max

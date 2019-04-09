@@ -33,8 +33,8 @@ class multiplyDigits_spec(unittest.TestCase):
     self.assertEqual(result.tolist(), [1, 2, 3, 4, 5])
 
   def test_odd_single_dimension_list(self):
-    result = multiplyDigits(np.array([11,123,13,144,125]))
-    self.assertEqual(result.tolist(), [1, 6, 3, 16, 10])
+    result = multiplyDigits(np.array([11,103,13,144,125, 40]))
+    self.assertEqual(result.tolist(), [1, 0, 3, 16, 10, 0])
 
   # def test_even_multi_dimension_list(self):
   #   result = multiplyDigits(np.array([11, 12], [22, 24]))
