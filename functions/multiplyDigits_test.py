@@ -25,6 +25,12 @@ class multiplyDigits_spec(unittest.TestCase):
     result = multiplyDigits(np.array([4872]))
     self.assertEqual(result, 448)
 
+    result = multiplyDigits(np.array([113]))
+    self.assertEqual(result, 3)
+
+    result = multiplyDigits(np.array([125]))
+    self.assertEqual(result, 10)
+
     result = multiplyDigits(np.array([24]))
     self.assertEqual(result, 8)
 
@@ -36,9 +42,9 @@ class multiplyDigits_spec(unittest.TestCase):
     result = multiplyDigits(np.array([11,103,13,144,125, 40]))
     self.assertEqual(result.tolist(), [1, 0, 3, 16, 10, 0])
 
-  # def test_even_multi_dimension_list(self):
-  #   result = multiplyDigits(np.array([11, 12], [22, 24]))
-  #   self.assertEqual(result.tolist(), [[1, 2], [4, 8]])
+  def test_even_multi_dimension_list(self):
+    result = multiplyDigits(np.array([[10, 23], [45, 67]]))
+    self.assertEqual(result.tolist(), [[0, 6], [20, 42]])
 
 if __name__ == '__main__':
     unittest.main()

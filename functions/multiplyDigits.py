@@ -21,23 +21,28 @@ def multiplyDigits(number):
   # calculate the number of digits and the max number of digits
   # e.g. [4 -> 1, 20 -> 2, 153 -> 3], maxNod -> 3
   nod = numOfDigits(number)
-  maxNod = np.amax(nod)
+  maxNod = int(np.amax(nod))
 
-  # build a range from 0 to our max number of digits
-  # repeat that for however many digits we have
-  # e.g. 4 -> 0, 1, 2, 3
-  mask = np.tile(np.arange(0, maxNod, dtype=object), number.shape + (1,))
+  # extra dimensions used for building new shapes
+  extraDimensions = (1,) * len(number.shape)
+
+  # tile numbers for as many digits as there are
+  # e.g. 212 -> [212, 212, 212]
+  tiledNumber = np.tile(number, (maxNod,) + extraDimensions)
+
+  # build range to operate on tiledNumber
+  # e.g. maxNod=3 -> [[1], [10], [100]]
+  # rangeOperator = 10 ** np.arange(maxNod)[:,None]
+  rangeOperator = np.reshape(10 ** np.arange(maxNod), (maxNod,) + extraDimensions)
 
   # split our numbers into digit arrays
-  # (will have zeros at the end for any digits not counted)
+  # (will have fractions at the end for any digits not counted)
   # e.g. 256, max=5 -> [2, 5, 6, 0, 0]
-  digits = (number[:, None] // 10 ** mask) % 10
+  digitsWithFractions = tiledNumber / rangeOperator
+  digits = (tiledNumber // rangeOperator) % 10
 
-  # fill in zeros from before with ones, if our nod is less than the max
-  # e.g. 256, max=5 -> ([2, 5, 6, 0, 0], nod = 3) -> [2, 5, 6, 1, 1]
-  # still keeps any zeros in the original below the nod
-  # e.g. 206, max=5 -> ([2, 0, 6, 0, 0], nod = 3) -> [2, 0, 6, 1, 1]
-  digitsWithOnes = np.where(mask < nod[:, None], digits, 1)
+  # digits that are less than one before mod is a digit we shouldn't count
+  digitsWithOnes = np.where((digitsWithFractions < 1) & (digitsWithFractions > 0), 1, digits)
 
   # build product
-  return np.prod(digitsWithOnes, axis=-1)
+  return np.prod(digitsWithOnes, axis=0)

@@ -15,4 +15,4 @@ def filterForTarget(listOfNumbers, target):
     nDim results
   """
   products = multiplyDigits(listOfNumbers)
-  return listOfNumbers[products == target]
+  return listOfNumbers[products == target[:, None]]
