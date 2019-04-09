@@ -1,8 +1,12 @@
+import numpy as np
 from functions.generatePersistentNumbers import generatePersistentNumbers
 
 def generatePersistentNumbersAtStep(start, step):
-  if (step == 0):
+  print('Testing:', start)
+  if (step == 0 or len(start) == 0):
     return start
   # recursive call
   nextSteps = generatePersistentNumbers(start)
-  return generatePersistentNumbersAtStep(nextSteps, step - 1)
+  uniqueSteps = np.unique(nextSteps)
+  uniqueStepsWithoutStart = np.setdiff1d(uniqueSteps, start)
+  return generatePersistentNumbersAtStep(uniqueStepsWithoutStart, step - 1)

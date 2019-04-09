@@ -9,4 +9,4 @@ def parseIntArray(value):
   return np.array([int(value)], dtype='float64')
 
 results = generatePersistentNumbersAtStep(parseIntArray(start), parseIntArray(steps))
-print(results)
+print('Results:', results)
