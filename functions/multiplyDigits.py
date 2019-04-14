@@ -3,7 +3,7 @@ from functions.numOfDigits import numOfDigits
 
 # multiplyDigits - takes in an array of numbers,
 # and returns the product of it's digits
-def multiplyDigits(number):
+def multiplyDigits(number, base = 10):
   """
   gives the product of all digits in a number
 
@@ -20,7 +20,7 @@ def multiplyDigits(number):
 
   # calculate the number of digits and the max number of digits
   # e.g. [4 -> 1, 20 -> 2, 153 -> 3], maxNod -> 3
-  nod = numOfDigits(number)
+  nod = numOfDigits(number, base)
   maxNod = int(np.amax(nod))
 
   # extra dimensions used for building new shapes
@@ -33,13 +33,13 @@ def multiplyDigits(number):
   # build range to operate on tiledNumber
   # e.g. maxNod=3 -> [[1], [10], [100]]
   # rangeOperator = 10 ** np.arange(maxNod)[:,None]
-  rangeOperator = np.reshape(10 ** np.arange(maxNod), (maxNod,) + extraDimensions)
+  rangeOperator = np.reshape(base ** np.arange(maxNod), (maxNod,) + extraDimensions)
 
   # split our numbers into digit arrays
   # (will have fractions at the end for any digits not counted)
   # e.g. 256, max=5 -> [2, 5, 6, 0, 0]
   digitsWithFractions = tiledNumber / rangeOperator
-  digits = (tiledNumber // rangeOperator) % 10
+  digits = (tiledNumber // rangeOperator) % base
 
   # digits that are less than one before mod is a digit we shouldn't count
   digitsWithOnes = np.where((digitsWithFractions < 1) & (digitsWithFractions > 0), 1, digits)

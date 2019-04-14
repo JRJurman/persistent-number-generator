@@ -1,6 +1,6 @@
 import numpy as np
 
-def numOfDigits(number):
+def numOfDigits(number, base = 10):
   """
   given a list of numbers, return the number of digits that number has
 
@@ -14,10 +14,10 @@ def numOfDigits(number):
   Returns:
     an nDim list of values
   """
-  numOfDigits = np.floor(np.log10(number))
+  # natural log (number) / log (base) = log of base (number)
+  numOfDigits = np.floor(np.log(number) / np.log(base))
 
-  # log10 of 0 is -inf, so we'll just set that to 0 digits
+  # log of 0 is -inf, so we'll just set that to 0 digits
   numOfDigits[numOfDigits < 0] = 0
 
-  numOfDigits += 1
-  return numOfDigits
+  return numOfDigits + 1

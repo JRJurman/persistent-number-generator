@@ -1,7 +1,7 @@
 import numpy as np
 from functions.multiplyDigits import multiplyDigits
 
-def filterForTarget(listOfNumbers, target):
+def filterForTarget(listOfNumbers, target, base = 10):
   """
   given a list of numbers, find which numbers multiply to get our number
 
@@ -15,5 +15,5 @@ def filterForTarget(listOfNumbers, target):
   Returns:
     nDim results
   """
-  products = multiplyDigits(listOfNumbers)
+  products = multiplyDigits(listOfNumbers, base)
   return listOfNumbers[products == target]
