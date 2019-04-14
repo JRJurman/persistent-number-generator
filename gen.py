@@ -1,7 +1,11 @@
 import sys
 import numpy as np
+import warnings
 from functions.generatePersistentNumbersAtStep import generatePersistentNumbersAtStep
 from functions.mapListToBase import mapListToBase
+
+# log(0) causes a runtime warning, so we're suppressing runtime warnings for this program
+warnings.simplefilter("ignore")
 
 start = sys.argv[1]
 steps = sys.argv[2]
