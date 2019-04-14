@@ -1,14 +1,15 @@
 import numpy as np
 from functions.generatePersistentNumbers import generatePersistentNumbers
+from functions.mapListToBase import mapListToBase
 
 def generatePersistentNumbersAtStep(start, step, base = 10, extraDigits = 1):
-  return generatePersistentNumbersAtStepRec(start, step, base, extraDigits)
+  return generatePersistentNumbersAtStepLoop(start, step, base, extraDigits)
 
 def generatePersistentNumbersAtStepRec(start, step, base, extraDigits):
   if (step == 0 or len(start) == 0):
     return start
   # recursive call
-  print('Testing:', start)
+  print('Testing:', mapListToBase(start, base))
   nextSteps = generatePersistentNumbers(start, base, extraDigits)
   uniqueSteps = np.unique(nextSteps)
   uniqueStepsWithoutStart = np.setdiff1d(uniqueSteps, start)
@@ -16,7 +17,7 @@ def generatePersistentNumbersAtStepRec(start, step, base, extraDigits):
 
 def generatePersistentNumbersAtStepLoop(start, step, base, extraDigits):
   while (step != 0 and len(start) != 0):
-    print('Testing:', start)
+    print('Testing:', mapListToBase(start, base))
     nextSteps = generatePersistentNumbers(start, base, extraDigits)
     uniqueSteps = np.unique(nextSteps)
     start = np.setdiff1d(uniqueSteps, start)

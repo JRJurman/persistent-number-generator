@@ -1,6 +1,7 @@
 import sys
 import numpy as np
 from functions.generatePersistentNumbersAtStep import generatePersistentNumbersAtStep
+from functions.mapListToBase import mapListToBase
 
 start = sys.argv[1]
 steps = sys.argv[2]
@@ -11,4 +12,4 @@ def parseIntArray(value):
   return np.array([int(value)], dtype='float64')
 
 results = generatePersistentNumbersAtStep(parseIntArray(start), parseIntArray(steps), base, extraDigits)
-print('Results:', results)
+print('Results:', mapListToBase(results, base))
