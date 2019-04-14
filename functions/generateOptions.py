@@ -1,7 +1,7 @@
 import numpy as np
 from functions.numOfDigits import numOfDigits
 
-def generateOptions(start, extraDigits = 1, base = 10):
+def generateOptions(start, base = 10, extraDigits = 1):
   """
   build nDim range of all possible values that could multiply to starting value
 
